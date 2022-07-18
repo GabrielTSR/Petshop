@@ -127,16 +127,10 @@ export class SchedulingService {
                 return new ErrorWithStats('Scheduling does not exists!', 404);
             }
 
-            //Updating the category with the data that was sent
-            scheduling.date = date;
-            scheduling.clientRequester = scheduling.clientRequester;
-            scheduling.service = scheduling.service;
-            scheduling.pet = scheduling.pet;
+            //Saving the scheduling
+            await schedulingRepository.save({ ...scheduling, date });
 
-            //Saving the category
-            await schedulingRepository.save(scheduling);
-
-            //Returning the category
+            //Returning the scheduling
             return scheduling;
         } catch (error) {
             //If an error occurs, return it
