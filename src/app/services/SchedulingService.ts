@@ -16,7 +16,7 @@ import { Scheduling } from '../entity/scheduling';
 
 //Defining all types used
 type validateDataParams = {
-    date: Date;
+    wantedDate: Date;
     clientRequester: Client;
     service: Service;
     pet: Pet;
@@ -24,7 +24,7 @@ type validateDataParams = {
 };
 
 type createSchedulingRequest = {
-    date: Date;
+    wantedDate: Date;
     clientRequester: Client;
     service: Service;
     pet: Pet;
@@ -32,14 +32,14 @@ type createSchedulingRequest = {
 
 type rescheduleRequest = {
     id: number;
-    date: Date;
+    wantedDate: Date;
 };
 
 //Class used to handle the Service service
 export class SchedulingService {
     //This method is used to validate the data used to create or update an Scheduling
     async validateData({
-        date,
+        wantedDate,
         clientRequester,
         service,
         pet,
@@ -48,16 +48,14 @@ export class SchedulingService {
         try {
             //Exclusive validation for the creation case
             if (isCreation) {
-                if (!date) return ['Date is empty', 400];
                 if (!clientRequester) return ['Requester is empty', 400];
                 if (!service) return ['Service is empty', 400];
                 if (!pet) return ['Pet is empty', 400];
             }
 
-            if (date) {
-                //Date must be in future
-                if (date < new Date()) return ['Date must be in future', 400];
-            }
+            if (!wantedDate) return ['Date is empty', 400];
+            //Date must be in future
+            if (wantedDate < new Date()) return ['Date must be in future', 400];
 
             //If the clientRequester is invalid, return error
             if (clientRequester) {
@@ -82,7 +80,7 @@ export class SchedulingService {
 
     //This method is used to create a new Scheduling
     async createScheduling({
-        date,
+        wantedDate,
         clientRequester,
         service,
         pet,
@@ -90,7 +88,7 @@ export class SchedulingService {
         try {
             //Checking if the incoming data is valid
             const isValidationInvalid = await this.validateData({
-                date,
+                wantedDate,
                 clientRequester,
                 service,
                 pet,
@@ -103,8 +101,9 @@ export class SchedulingService {
             }
 
             //Creating an Scheduling instance
-            const scheduling = schedulingRepository.create({ date, clientRequester, service, pet });
+            const scheduling = schedulingRepository.create({ wantedDate, clientRequester, service, pet });
 
+            console.log(scheduling);
             //Saving the Scheduling to database
             await schedulingRepository.insert(scheduling);
 
@@ -117,7 +116,7 @@ export class SchedulingService {
     }
 
     //This method is used to reschedule a Scheduling
-    async reschedule({ id, date }: rescheduleRequest): Promise<Scheduling | ErrorWithStats> {
+    async reschedule({ id, wantedDate }: rescheduleRequest): Promise<Scheduling | ErrorWithStats> {
         try {
             //Checking if the scheduling exists
             const scheduling = await schedulingRepository.findOne({ where: { id } });
@@ -128,7 +127,7 @@ export class SchedulingService {
             }
 
             //Saving the scheduling
-            await schedulingRepository.save({ ...scheduling, date });
+            await schedulingRepository.save({ ...scheduling, wantedDate });
 
             //Returning the scheduling
             return scheduling;

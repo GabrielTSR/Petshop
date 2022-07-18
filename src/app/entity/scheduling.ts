@@ -20,7 +20,7 @@ export class Scheduling {
     @Column({
         name: 'date_scheduling',
     })
-    date: Date;
+    wantedDate: Date;
 
     @Column({
         default: false,

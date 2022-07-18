@@ -19,7 +19,7 @@
 
 # Steps to run this project:
 
-    1. Run `npm i` command to install the dependencies;
-    2. Use the command `CREATE DATABASE db_petshop` to create the used MySQL database.
+    1. Run `npm install` command to install the dependencies;
+    2. Create a database with "db_petshop" name, use the command `CREATE DATABASE db_petshop` to create the used MySQL database.
     3. Run `npm run dev` command to run the dev version, or `npm run build` to run the build version.
     4. The "Requests" folder has examples of how requests should be sent, import this JSON into Postman

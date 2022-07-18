@@ -9,11 +9,11 @@ const schedulingService = new SchedulingService();
 //This function is used to create an scheduling
 export async function createScheduling(req: Request, res: Response) {
     //Getting the data from the request body
-    const { date, clientRequester, service, pet } = req.body;
+    const { wantedDate, clientRequester, service, pet } = req.body;
 
     //Using the Scheduling Service to create an scheduling
     const result = await schedulingService.createScheduling({
-        date,
+        wantedDate,
         clientRequester,
         service,
         pet,
@@ -34,13 +34,13 @@ export async function reschedule(req: Request, res: Response) {
     const { id } = req.params;
 
     //Getting the data from the request body
-    const { date } = req.body;
+    const { wantedDate } = req.body;
 
     //Checking if the id is a number
     if (!isIdValid(id)) return res.status(400).json({ error: { message: 'Invalid scheduling id' } });
 
     //Using Schedulingervice to update a category
-    const result = await schedulingService.reschedule({ id: Number(id), date });
+    const result = await schedulingService.reschedule({ id: Number(id), wantedDate });
 
     //If an error occurred, return it
     if (result instanceof ErrorWithStats) {
