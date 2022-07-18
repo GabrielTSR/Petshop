@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "bb38151a-4ff9-4ee0-97b7-5d33e46a3a8a",
+		"name": "Petshop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18217235"
+	},
+	"item": [
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Claudio\",\r\n    \"phoneNumber\": \"(11)95454-5987\",\r\n    \"email\": \"testing2@gmail.com\",\r\n    \"age\": 30,\r\n    \"pets\": [\r\n        {\r\n        \"id\": 1\r\n    }\r\n    ] \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/users",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Service",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Banho\",\r\n    \"description\": \"Limpamos o seu animal\",\r\n    \"duration\": \"2\",\r\n    \"priceReal\": 90\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/services",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"services"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pet",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"breed\": {\"id\": 1},\r\n    \"owners\": [\r\n        {\r\n            \"id\": 1\r\n        },\r\n        {\r\n            \"id\": 2\r\n        }\r\n    ],\r\n    \"name\": \"Meg\",\r\n    \"age\": 2,\r\n    \"weight\": 15,\r\n    \"appearance\": \"Um cachorro branco e caramelo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/pets",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"pets"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Scheduling",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"2022-07-18 30:06:40.741506\",\r\n    \"clientRequester\": {\r\n        \"id\": 1\r\n    },\r\n    \"service\": {\r\n        \"id\": 1\r\n    },\r\n    \"pet\": {\r\n        \"id\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/scheduling",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"scheduling"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reschedule",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"date\": \"2022-07-18 30:06:40.741506\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/scheduling/reschedule",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"scheduling",
+								"reschedule"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "domain",
+			"value": "http://localhost:3333",
+			"type": "string"
+		}
+	]
+}
